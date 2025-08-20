@@ -1,0 +1,23 @@
+@ShiftsLogger.API_HostAddress = https://localhost:7194
+
+POST {{ShiftsLogger.API_HostAddress}}/shifts/add
+Accept: application/json
+Content-Type: application/json
+
+{
+  "date": "2025-08-15T00:00:00",
+  "start": "2025-08-15T09:00:00",
+  "end": "2025-08-15T18:00:00",
+  "workerId":1
+}
+###
+
+DELETE {{ShiftsLogger.API_HostAddress}}/shifts/delete/2
+
+###
+
+PUT {{ShiftsLogger.API_HostAddress}}/shifts/update
+
+###
+
+GET {{ShiftsLogger.API_HostAddress}}/shifts/search?workerId=6&date=2025-08-20

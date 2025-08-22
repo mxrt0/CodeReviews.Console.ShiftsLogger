@@ -81,14 +81,13 @@ public class APIHelper
         {
             var response = await _client.GetAsync(url);
             var jsonResponse = await response.Content.ReadAsStringAsync();
-            var shift = JsonConvert.DeserializeObject<ShiftDto>(jsonResponse);
 
-            if (!response.IsSuccessStatusCode || shift is null)
+            if (!response.IsSuccessStatusCode)
             {
                 string responseMessage = JsonConvert.DeserializeObject<ErrorResponse>(jsonResponse)?.Errors[0] ?? string.Empty;
                 return (responseMessage, null);
             }
-
+            var shift = JsonConvert.DeserializeObject<ShiftDto>(jsonResponse);
             return (string.Empty, shift);
         }
         catch (Exception ex)
@@ -103,11 +102,17 @@ public class APIHelper
         {
             var response = await _client.GetAsync("Shifts/all");
             var jsonResponse = await response.Content.ReadAsStringAsync();
-            var shifts = JsonConvert.DeserializeObject<List<ShiftDto>>(jsonResponse);
-            if (!response.IsSuccessStatusCode || shifts is null)
+
+            if (!response.IsSuccessStatusCode)
             {
                 string responseMessage = JsonConvert.DeserializeObject<ErrorResponse>(jsonResponse)?.Errors[0] ?? string.Empty;
                 return (responseMessage, null);
+            }
+
+            var shifts = JsonConvert.DeserializeObject<List<ShiftDto>>(jsonResponse);
+            if (shifts is null || shifts.Count == 0)
+            {
+                return ("No shifts returned.", null);
             }
 
             return (string.Empty, shifts);

@@ -36,7 +36,7 @@ public class ShiftsService : IShiftsService
 
     public List<ShiftDto> GetAllShifts()
     {
-        return _dbContext.Shifts.Any() ? _dbContext.Shifts.Select(s => s.ToShiftDto()).ToList() : new();
+        return _dbContext.Shifts.Select(s => s.ToShiftDto()).ToList();
     }
 
     public ShiftDto GetShift(int workerId, DateTime date)

@@ -36,7 +36,7 @@ public class WorkerService : IWorkerService
 
     public List<WorkerDto> GetAllWorkers()
     {
-        return _dbContext.Workers.Any() ? _dbContext.Workers.Select(w => w.ToWorkerDto()).ToList() : new();
+        return _dbContext.Workers.Select(w => w.ToWorkerDto()).ToList();
     }
 
     public void UpdateWorker(int workerId, CreateWorkerDto newWorkerDto)

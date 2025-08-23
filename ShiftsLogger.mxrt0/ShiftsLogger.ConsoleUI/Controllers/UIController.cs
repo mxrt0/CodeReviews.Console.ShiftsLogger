@@ -99,7 +99,7 @@ namespace ShiftsLogger.ConsoleUI.Controllers
             Console.Clear();
             Console.WriteLine("\nEnter the details of the shift you wish to delete:\n");
             await DisplayWorkers();
-            var shiftToDelete = GetExistingShift();
+            var shiftToDelete = await GetExistingShift();
 
             Console.WriteLine("\nFound shift! Are you sure you wish to delete it [Y/N]:\n");
             string? confirm = Console.ReadLine();

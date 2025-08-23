@@ -15,7 +15,12 @@ public class APIHelper
         try
         {
             var response = await _client.GetAsync("Workers");
+            if (!response.IsSuccessStatusCode)
+            {
+                return [];
+            }
             var jsonWorkers = await response.Content.ReadAsStringAsync();
+
             return JsonConvert.DeserializeObject<List<WorkerDto>>(jsonWorkers) ?? new();
         }
         catch (Exception)

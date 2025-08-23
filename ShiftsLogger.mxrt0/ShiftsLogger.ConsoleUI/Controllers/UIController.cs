@@ -144,7 +144,7 @@ namespace ShiftsLogger.ConsoleUI.Controllers
 
             await DisplayWorkers();
             Console.WriteLine("\nEnter the details of the shift you wish to update:\n");
-            var shiftToUpdate = GetExistingShift();
+            var shiftToUpdate = await GetExistingShift();
             Console.WriteLine("\nFound shift! Now enter the new details:\n");
 
             Console.WriteLine(Messages.ShiftStartDateMessage);
